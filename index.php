@@ -414,24 +414,69 @@ echo $total;
 find_longest_word($find);
 
 echo '<hr />';
-echo '9. Нужно написать функцию, которая проверяет, являются ли две строки анаграммами, причем регистр букв не имеет значения. Учитываются лишь символы; пробелы или знаки препинания в расчет не берутся.<br><br>';
+echo '9 &#9989. Нужно написать функцию, которая проверяет, являются ли две строки анаграммами, причем регистр букв не имеет значения. Учитываются лишь символы; пробелы или знаки препинания в расчет не берутся.<br><br>';
 
-echo "<form style=\"width: 50%;	height: 17%; outline: 2px solid #000; border: 3px solid #fff; border-radius: 10px; \" method=\"POST\">
-<p>Первая строка: <input type=\"line\", name=\"first\" placeholder='1'/></p>
-<p>Вторая строка: <input type=\"line\", name=\"lost\" placeholder='2'/></p>
+echo "<form style=\"width: 50%;	height: 15%; outline: 2px solid #000; border: 3px solid #fff; border-radius: 10px; \" method=\"POST\">
+<p>Первая строка: <input type=\"line\", name=\"first\" placeholder='ONO'/></p>
+<p>Вторая строка: <input type=\"line\", name=\"lost\" placeholder='ONO'/></p>
 <p><input type=\"submit\"/></p>
 </form>";
 $a2 = (string)$_POST['first'];
 $b2 = (string)$_POST['lost'];
 
-function anagramm(){
+function anagramm($a2, $b2){
+    $a2 = str_split($a2, 1);
+    $b2 = str_split($b2, 1);
+    if (count($a2)==count($b2)){
+        for ($i = 0; $i < count($a2); $i++){
+            if($a2[$i] != $b2[$i]){
+                echo "NO";
+                break;
+            }
 
+            }
+            echo "YES";
+        }
+    else{
+        echo "NO";
+    }
 }
-anagramm();
+anagramm($a2, $b2);
 
 echo '<hr />';
-echo '10. Напишите функцию create_password по созданию паролей длиной от минимум 8 символов, либо до кол-ва введеного через параметр. Обязательные требования к паролю: латинские символы и целые числа; 
+echo '10 &#9989. Напишите функцию create_password по созданию паролей длиной от минимум 8 символов, либо до кол-ва введеного через параметр. Обязательные требования к паролю: латинские символы и целые числа; 
 специальные симоволы: _-,.&*^$#@+=!; минимум один большой симовол, одна цифра, один спец. символ.<br><br>';
+echo "Введите количество символов:";
+echo "<div class='form'> <form method='POST'> <input name='password' type='number' placeholder='8'> </form>";
+$password = (int)$_POST['password'];
+
+function create_password($a = 8){
+$arr_low = ["a","b","c","d","e","f","g","h","i","j","k","l","m",
+"n","o","p","q","r","s","t","u","v","w","x","y","z"];
+$arr_up = ["A","B","C","D","E","F","G","H","I","J","K","L","M",
+"N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+$arr_sym = ["_","-",",",".","&","*","^","$","#","@","+","=","!"];
+$arr_num = [0,1,2,3,4,5,6,7,8,9];
+$len_typ = floor($a /3);
+
+$total_pass = [];
+
+    for ($i = 0; $i < ($len_typ); $i++){
+        array_push($total_pass, $arr_up[rand(0, 26)]);
+        array_push($total_pass, $arr_sym[rand(0, 13)]);
+        array_push($total_pass, $arr_num[rand(0, 10)]);
+    };
+    if ($len_typ*3 < $a){
+        for ($i = 0; $i < ($a - ($len_typ*3)); $i++){
+        array_push($total_pass, $arr_low[rand(0, 26)]);
+    };
+}
+echo "Количество символов в пароле: " . count($total_pass) . "<br>";
+shuffle($total_pass);
+echo "Ваш пароль: " . implode($total_pass) . "<br>";
+
+}
+create_password($password);
 
 echo '<hr />';
 echo '11 &#9989. Создайте функцию "Калькулятор", calc(expression), которая должны уметь вычислять операции: сложение, вычитание, умножение, разность; между положительными целочисленными значениями. 
@@ -475,5 +520,13 @@ function calc($calc){
 
 
 echo '<hr />';
-echo '12. Напиши функцию, которая будет проверять любой объем текста на вхождение плохих (запрещенных) слов, и возвращать новый, прошедший цензуру, текст. 
-Запрещенные слова нужно заменить на символы "#" в зависимости от длины слова. В функцию нужно передавать два параметра: текст, массив запрещенных слов.<br><br>';
+echo '12. Напиши функцию, которая будет проверять любой объем текста на вхождение плохих 
+(запрещенных) слов, и возвращать новый, прошедший цензуру, текст. 
+Запрещенные слова нужно заменить на символы "#" в зависимости от длины слова. 
+В функцию нужно передавать два параметра: текст, массив запрещенных слов.<br><br>';
+
+echo "<form style=\"width: 50%;	height: 15%; outline: 2px solid #000; border: 3px solid #fff; border-radius: 10px; \" method=\"POST\">
+<p>Первая строка: <input type=\"line\", name=\"first\" placeholder='ONO'/></p>
+<p>Вторая строка: <input type=\"line\", name=\"lost\" placeholder='ONO'/></p>
+<p><input type=\"submit\"/></p>
+</form>";
