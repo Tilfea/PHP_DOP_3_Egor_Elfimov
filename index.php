@@ -158,7 +158,7 @@ echo '<hr />';
 echo '6 &#9989. Необходимо написать программу, которая проверяет пользователя на знание таблицы умножения. Пользователь сам вводит два целых однозначных числа. Затем вводит результат умножения и 
 в результате должен увидеть на экране правильно он ответил или нет.<br><br>';
 
-echo "<form style=\"width: 50%;	height: 17%; outline: 2px solid #000; border: 3px solid #fff; border-radius: 10px; \" method=\"POST\">
+echo "<form style=\"width: 30vh;	height: 17%; outline: 2px solid #000; border: 3px solid #fff; border-radius: 10px; \" method=\"POST\">
 <p>Первое число: <input type=\"number\", name=\"first\" placeholder='1'/></p>
 <p>Второе число: <input type=\"number\", name=\"lost\" placeholder='2'/></p>
 <p>Результат: <input type=\"number\", name=\"total\" placeholder='3'/></p>
@@ -197,7 +197,7 @@ echo '8 &#9989. У треугольника сумма любых двух ст�
 Используя конструкцию if..else (один раз), напишите код, который должен определять, может ли существовать треугольник при таких длинах. Т. е. нужно сравнить суммы двух любых строн с оставшейся третьей стороной. 
 Чтобы треугольник существовал, сумма всегда должна быть больше отдельной стороны.<br><br>';
 
-echo "<form style=\"width: 50%;	height: 17%; outline: 2px solid #000; border: 3px solid #fff; border-radius: 10px; \" method=\"POST\">
+echo "<form style=\"width: 50vh;	height: 17%; outline: 2px solid #000; border: 3px solid #fff; border-radius: 10px; \" method=\"POST\">
 <p>Первая сторона треугольника: <input type=\"number\", name=\"one\" placeholder='1'/></p>
 <p>Вторая сторона треугольника: <input type=\"number\", name=\"two\" placeholder='2'/></p>
 <p>Третья сторона треугольника: <input type=\"number\", name=\"three\" placeholder='3'/></p>
@@ -416,7 +416,7 @@ find_longest_word($find);
 echo '<hr />';
 echo '9 &#9989. Нужно написать функцию, которая проверяет, являются ли две строки анаграммами, причем регистр букв не имеет значения. Учитываются лишь символы; пробелы или знаки препинания в расчет не берутся.<br><br>';
 
-echo "<form style=\"width: 50%;	height: 15%; outline: 2px solid #000; border: 3px solid #fff; border-radius: 10px; \" method=\"POST\">
+echo "<form style=\"width: 30vh;	height: 15%; outline: 2px solid #000; border: 3px solid #fff; border-radius: 10px; \" method=\"POST\">
 <p>Первая строка: <input type=\"line\", name=\"first\" placeholder='ONO'/></p>
 <p>Вторая строка: <input type=\"line\", name=\"lost\" placeholder='ONO'/></p>
 <p><input type=\"submit\"/></p>
@@ -520,13 +520,32 @@ function calc($calc){
 
 
 echo '<hr />';
-echo '12. Напиши функцию, которая будет проверять любой объем текста на вхождение плохих 
+echo '12 &#9989. Напиши функцию, которая будет проверять любой объем текста на вхождение плохих 
 (запрещенных) слов, и возвращать новый, прошедший цензуру, текст. 
 Запрещенные слова нужно заменить на символы "#" в зависимости от длины слова. 
 В функцию нужно передавать два параметра: текст, массив запрещенных слов.<br><br>';
 
-echo "<form style=\"width: 50%;	height: 15%; outline: 2px solid #000; border: 3px solid #fff; border-radius: 10px; \" method=\"POST\">
-<p>Первая строка: <input type=\"line\", name=\"first\" placeholder='ONO'/></p>
-<p>Вторая строка: <input type=\"line\", name=\"lost\" placeholder='ONO'/></p>
+echo "<form style=\"width: 30vh;	height: 18%; outline: 2px solid #000; border: 3px solid #fff; border-radius: 10px; \" method=\"POST\">
+<p>Текст: <br><input type=\"line\", name=\"text\" placeholder='Text'/></p>
+<p>Список стоп-слов через запятую: <br><input type=\"line\", name=\"stop_word\" placeholder='Stop'/></p>
 <p><input type=\"submit\"/></p>
 </form>";
+$text = (string)$_POST['text'];
+$stop_word = (string)$_POST['stop_word'];
+
+function stop($text, $stop_word){
+$text = preg_split('/[\s]+/', $text);
+$stop_word = preg_split('/[\s,]+/', $stop_word);
+
+for ($i = 0; $i < count($stop_word); $i++){
+    for($j = 0; $j < count($text); $j++){
+        if(strpos($text[$j], $stop_word[$i]) == 'NaN'){
+            $x = str_repeat('#', strlen($text[$j]));
+            $text[$j] = $x;
+        }
+    }
+}
+echo implode(' ', $text);
+}
+stop($text, $stop_word);
+
