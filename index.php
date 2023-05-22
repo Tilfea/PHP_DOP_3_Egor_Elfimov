@@ -317,44 +317,163 @@ num();
 echo '<hr />';
 
 
-echo '4. Есть 2 массива: arr1 = [1,2,3,4,5,6,7,8] и arr2 = [5, 3, 6, 9, 11]. Напишите функцию, которая принимает 2 массива и возвращает массив элементов, которые есть в обоих массивах. <br><br>';
+echo '4 &#9989. Есть 2 массива: arr1 = [1,2,3,4,5,6,7,8] и arr2 = [5, 3, 6, 9, 11]. Напишите функцию, которая принимает 2 массива и возвращает массив элементов, которые есть в обоих массивах. <br><br>';
+function arr_all(){
+    $arr1 = [1,2,3,4,5,6,7,8];
+    $arr2 = [5, 3, 6, 9, 11];
+    $total_arr = [];
+    $Flag = True;
+    if (count($arr1) > count($arr2)){
+    $len = count($arr1);
+    $len2 = count($arr2);
+} else{$len = count($arr2); 
+    $len2 = count($arr1);
+    $Flag = False;}
 
-$arr1 = [1,2,3,4,5,6,7,8];
-$arr2 = [5, 3, 6, 9, 11];
+for($i = 0; $i < $len; $i++){
+    for($j=0; $j < $len2; $j++){
+        if($Flag == True){
+            if($arr1[$i] == $arr2[$j]){
+                array_push($total_arr, $arr1[$i]);
+                break;
+            }
+        }else{
+            if($arr2[$i] == $arr1[$j]){
+                array_push($total_arr, $arr2[$i]);
+                break;
+            }
+        }
+    }
+}
+echo 'Одинаковые значения в массивах: ';
+echo implode(', ', $total_arr);
+}
+arr_all();
 
 echo '<hr />';
-echo '5. Есть два массива с числовыми значениями одинаковой длины. Создайте третий массив с суммами элементов данных массивов. Например:  [12,4,0] + [8,7,6] = [20, 11, 6].<br><br>';
+echo '5 &#9989. Есть два массива с числовыми значениями одинаковой длины. Создайте третий массив с суммами элементов данных массивов. Например:  [12,4,0] + [8,7,6] = [20, 11, 6].<br><br>';
+
+function sum_arr(){
+$arr1 = [12,4,0];
+$arr2 = [8,7,6];
+$total = [];
+for($i = 0; $i < count($arr1);$i++){
+    array_push($total, ($arr1[$i] + $arr2[$i]));
+}
+echo 'Массив с суммами элементов двух массивов: ' . implode(', ', $total);
+}
+sum_arr();
 
 echo '<hr />';
-echo '6. Поменяйте местами максимальный и минимальных элементы в массиве.<br><br>';
+echo '6 &#9989. Поменяйте местами максимальный и минимальных элементы в массиве.<br><br>';
+function reverse_num(){
+$start_arr = [1,2,3,4,5,6,7,8];
+$a = max($start_arr);
+$ind_a = array_search(max($start_arr), $start_arr);
+$b = min($start_arr);
+$ind_b = array_search(min($start_arr), $start_arr);
+
+$start_arr[$ind_a] = $b;
+$start_arr[$ind_b] = $a;
+echo 'Итоговая строка: ';
+echo implode(', ', $start_arr);
+}
+reverse_num();
 
 echo '<hr />';
-echo '7. Напишите функцию alpha_bet_order(str), которая возвращает переданную строку с буквами в алфавитном порядке. Пример строки: \'alphabetical\'. Ожидаемый результат: 
+echo '7 &#9989. Напишите функцию alpha_bet_order(str), которая возвращает переданную строку с буквами в алфавитном порядке. Пример строки: \'alphabetical\'. Ожидаемый результат: 
 \'aaabcehillpt\'. Предположим, что символы пунктуации и цифры не включены в переданную строку.<br><br>';
+echo "<div class='form'> <form method='POST'> <input name='alpha_bet_order', type='line' placeholder='Введите строку'> </form>";
+$alfa = (string)$_POST['alpha_bet_order'];
+
+function alpha_bet_order(string $a){
+$a1 = str_split($a, 1);
+natcasesort($a1);
+echo 'Отсортированная строка: ';
+echo implode('', $a1);
+}
+alpha_bet_order($alfa);
 
 echo '<hr />';
-echo '8. Напишите функцию find_longest_word(str), которая принимает строку в качестве параметра и находит самое длинное слово в строке.<br><br>';
+echo '8 &#9989. Напишите функцию find_longest_word(str), которая принимает строку в качестве параметра и находит самое длинное слово в строке.<br><br>';
+echo "<div class='form'> <form method='POST'> <input name='find_longest_word', type='line' placeholder='Введите строку'> </form>";
+$find = (string)$_POST['find_longest_word'];
+
+function find_longest_word(string $a){
+$a1 = preg_split('/[\s.,!?]+/', $a);
+$total;
+$len = 1;
+for($i = 0; $i < count($a1); $i++){
+    if(mb_strlen($a1[$i])> $len){
+        $len = mb_strlen($a1[$i]);
+        $total = $a1[$i];
+    }
+}
+echo $total;
+}
+find_longest_word($find);
 
 echo '<hr />';
-
-
 echo '9. Нужно написать функцию, которая проверяет, являются ли две строки анаграммами, причем регистр букв не имеет значения. Учитываются лишь символы; пробелы или знаки препинания в расчет не берутся.<br><br>';
 
+echo "<form style=\"width: 50%;	height: 17%; outline: 2px solid #000; border: 3px solid #fff; border-radius: 10px; \" method=\"POST\">
+<p>Первая строка: <input type=\"line\", name=\"first\" placeholder='1'/></p>
+<p>Вторая строка: <input type=\"line\", name=\"lost\" placeholder='2'/></p>
+<p><input type=\"submit\"/></p>
+</form>";
+$a2 = (string)$_POST['first'];
+$b2 = (string)$_POST['lost'];
+
+function anagramm(){
+
+}
+anagramm();
+
 echo '<hr />';
-
-
 echo '10. Напишите функцию create_password по созданию паролей длиной от минимум 8 символов, либо до кол-ва введеного через параметр. Обязательные требования к паролю: латинские символы и целые числа; 
 специальные симоволы: _-,.&*^$#@+=!; минимум один большой симовол, одна цифра, один спец. символ.<br><br>';
 
 echo '<hr />';
-
-
-echo '11. Создайте функцию "Калькулятор", calc(expression), которая должны уметь вычислять операции: сложение, вычитание, умножение, разность; между положительными целочисленными значениями. 
+echo '11 &#9989. Создайте функцию "Калькулятор", calc(expression), которая должны уметь вычислять операции: сложение, вычитание, умножение, разность; между положительными целочисленными значениями. 
 Математическое выражение должно передаваться через параметр expression в виде строки, например: "45+8", "4-23". Если параметр не передается, то нужно запросить выражение через input. 
 Результат вычисления выведите через alert. Используйте регулярные выражения для "парсинг" (обработки) параметра).<br><br>';
 
+echo "<class='form'> <form method='POST'> <input name='calc', type='line' placeholder='Введите выражение'> </form>";
+$calc = (string)$_POST['calc'];
+if ($calc == ""){
+    echo("<script type='text/javascript'>alert('Введено не верное значение');</script>");
+} else {
+    calc($calc);
+}
+
+function calc($calc){
+    $a1 = preg_split('/[\s+-\/*]+/', $calc);
+    $b1 = preg_split('/[0-9]+/', $calc);
+
+    switch ($b1){   
+        case ($b1[1] == '+'):
+            $s = ($a1[0] + $a1[1]);
+            echo("<script type='text/javascript'>alert('Сумма чисел $a1[0] и $a1[1] равна $s');</script>");
+            break;
+        case ($b1[1] == '-'):
+            $s = ($a1[0] - $a1[1]);
+            echo("<script type='text/javascript'>alert('Разность чисел $a1[0] и $a1[1] равна $s');</script>");
+            break;
+        case ($b1[1] == '/'):
+            $s = ($a1[0] / $a1[1]);
+            echo("<script type='text/javascript'>alert('Частное чисел $a1[0] и $a1[1] равно $s');</script>");
+            break;
+        case ($b1[1] == '*'):
+            $s = ($a1[0] * $a1[1]);
+            echo("<script type='text/javascript'>alert('Произведение чисел $a1[0] и $a1[1] равно $s');</script>");
+            break;
+        case ($b1[1] == ""):
+            echo("<script type='text/javascript'>alert('Введено не верное значение');</script>");
+            break;
+    }
+}
+
+
 echo '<hr />';
-
-
 echo '12. Напиши функцию, которая будет проверять любой объем текста на вхождение плохих (запрещенных) слов, и возвращать новый, прошедший цензуру, текст. 
 Запрещенные слова нужно заменить на символы "#" в зависимости от длины слова. В функцию нужно передавать два параметра: текст, массив запрещенных слов.<br><br>';
